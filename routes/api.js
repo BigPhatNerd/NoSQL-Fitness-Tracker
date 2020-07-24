@@ -1,9 +1,16 @@
 const router = require("express").Router();
-const db = require("../models");
+
+//const db = require("../models");
+//change your reference to the db to:
+const db = require("../models/workout");
+//previously it was console.log()-ing db: {workout { model: Workout } } instead of {model: Workout}
+
 
 router.get("/api/workouts", ({ body }, res) => {
-  db.Workout.find({})
-    .then((dbWorkout) => {
+  
+  //db.Workout.find({})
+  //chnage all of your references from db.Workout to `db`
+    db.then((dbWorkout) => {
       res.json(dbWorkout);
     })
     .catch((err) => {
@@ -12,7 +19,8 @@ router.get("/api/workouts", ({ body }, res) => {
 });
 
 router.post("/api/workouts", (req, res) => {
-  db.Workout.create(req.body)
+  //db.Workout.create(req.body)
+  db..create(req.body)
     .then((dbWorkout) => {
       res.json(dbWorkout);
     })
@@ -22,7 +30,8 @@ router.post("/api/workouts", (req, res) => {
 });
 
 router.put("/api/workouts/:id", function ({ body, params }, res) {
-  db.Workout.updateOne({ _id: params.id }, { $push: { exercises: body } })
+  //db.Workout.updateOne({ _id: params.id }, { $push: { exercises: body } })
+  db.updateOne({ _id: params.id }, { $push: { exercises: body } })
     .then((dbWorkout) => {
       res.json(dbWorkout);
     })
@@ -32,7 +41,8 @@ router.put("/api/workouts/:id", function ({ body, params }, res) {
 });
 
 router.get("/api/workouts/range", (req, res) => {
-  db.Workout.find({})
+  //db.Workout.find({})
+  db.find({})
     .then((range) => {
       res.json(range);
     })
